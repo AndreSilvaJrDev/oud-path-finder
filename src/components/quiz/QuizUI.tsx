@@ -6,9 +6,9 @@ export function Shell({ children }: { children: ReactNode }) {
   );
 }
 
-export function TopBar({ step, total }: { step?: number; total?: number }) {
-  const showProgress = typeof step === "number" && typeof total === "number";
-  const pct = showProgress ? Math.round((step! / total!) * 100) : 0;
+export function TopBar({ step, total }: { step: number | undefined; total: number }) {
+  const showProgress = typeof step === "number";
+  const pct = showProgress ? Math.round((step! / total) * 100) : 0;
 
   return (
     <header className="sticky top-0 z-20 -mx-5 mb-8 bg-background/90 px-5 pb-4 pt-6 backdrop-blur-sm sm:-mx-6 sm:px-6">
@@ -86,7 +86,7 @@ export function PrimaryButton({
   children: ReactNode;
   onClick?: () => void;
   as?: "a";
-  href?: string;
+  href?: string | undefined;
 }) {
   const cls =
     "block w-full rounded-2xl bg-primary px-6 py-4 text-center text-[0.95rem] font-bold tracking-[0.12em] text-primary-foreground uppercase shadow-[var(--shadow-lift)] transition-all duration-200 hover:brightness-125 active:scale-[0.99]";
