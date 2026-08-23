@@ -1,4 +1,4 @@
-export const CHECKOUT_URL = "#";
+export const CHECKOUT_URL = "https://lastlink.com/p/C894C9A94/checkout-payment/";
 
 export type Question = {
   id: string;
