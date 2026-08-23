@@ -77,7 +77,7 @@ function QuizPage() {
       const saved = JSON.parse(raw) as { pos?: number; answers?: Answers };
       if (saved.answers) setAnswers(saved.answers);
       if (typeof saved.pos === "number" && saved.pos > 0 && saved.pos < SCREENS.length) {
-        const target = SCREENS[saved.pos];
+        const target = SCREENS[saved.pos]!;
         // nunca restaurar direto na tela de análise
         setPos(target.kind === "analyzing" ? saved.pos + 1 : saved.pos);
         started.current = true;
@@ -95,7 +95,7 @@ function QuizPage() {
     }
   }, [pos, answers]);
 
-  const screen = SCREENS[pos];
+  const screen = SCREENS[pos]!;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
@@ -114,7 +114,7 @@ function QuizPage() {
     screen.kind === "question" ? screen.index + 1 : undefined;
 
   const handleSelect = (qIndex: number, value: string) => {
-    const q = QUESTIONS[qIndex];
+    const q = QUESTIONS[qIndex]!;
     setPending(value);
     setAnswers((prev) => ({ ...prev, [q.id]: value }));
     track("QuizQuestionAnswered", { question: q.id, answer: value, step: qIndex + 1 });
@@ -144,7 +144,7 @@ function QuizPage() {
           {screen.kind === "question" && (
             <QuestionView
               index={screen.index}
-              selected={answers[QUESTIONS[screen.index].id]}
+              selected={answers[QUESTIONS[screen.index]!.id] ?? ""}
               pending={pending}
               onSelect={handleSelect}
               onBack={() => go(-1)}
@@ -211,12 +211,12 @@ function QuestionView({
   onBack,
 }: {
   index: number;
-  selected?: string;
+  selected: string;
   pending: string | null;
   onSelect: (i: number, v: string) => void;
   onBack: () => void;
 }) {
-  const q = QUESTIONS[index];
+  const q = QUESTIONS[index]!;
   return (
     <section>
       {q.eyebrow && (
