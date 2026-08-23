@@ -1,9 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import heroImg from "@/assets/perfumes-hero.jpg";
+import heroImgAsset from "@/assets/perfumes-hero.png.asset.json";
 import boxesImg from "@/assets/perfumes-boxes.jpg";
-import mockupImg from "@/assets/kit-mockup.jpg";
+import mockupImgAsset from "@/assets/kit-mockup.png.asset.json";
+
+const heroImg = heroImgAsset.url;
+const mockupImg = mockupImgAsset.url;
 import {
   BackButton,
   OptionCard,
