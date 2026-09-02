@@ -1,12 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import heroImgAsset from "@/assets/perfumes-hero.png.asset.json";
+import heroImg from "@/assets/perfumes-hero.png";
 import boxesImg from "@/assets/perfumes-boxes.jpg";
-import mockupImgAsset from "@/assets/kit-mockup.png.asset.json";
+import mockupImg from "@/assets/kit-mockup.png";
 
-const heroImg = heroImgAsset.url;
-const mockupImg = mockupImgAsset.url;
 import { BackButton, OptionCard, PrimaryButton, Shell, TopBar } from "@/components/quiz/QuizUI";
 import {
   BREAK_AFTER_INDEX,
