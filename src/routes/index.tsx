@@ -7,13 +7,7 @@ import mockupImgAsset from "@/assets/kit-mockup.png.asset.json";
 
 const heroImg = heroImgAsset.url;
 const mockupImg = mockupImgAsset.url;
-import {
-  BackButton,
-  OptionCard,
-  PrimaryButton,
-  Shell,
-  TopBar,
-} from "@/components/quiz/QuizUI";
+import { BackButton, OptionCard, PrimaryButton, Shell, TopBar } from "@/components/quiz/QuizUI";
 import {
   BREAK_AFTER_INDEX,
   CHECKOUT_URL,
@@ -113,8 +107,7 @@ function QuizPage() {
     setPos((p) => Math.min(SCREENS.length - 1, Math.max(0, p + delta)));
   }, []);
 
-  const questionNumber =
-    screen.kind === "question" ? screen.index + 1 : undefined;
+  const questionNumber = screen.kind === "question" ? screen.index + 1 : undefined;
 
   const handleSelect = (qIndex: number, value: string) => {
     const q = QUESTIONS[qIndex]!;
@@ -176,8 +169,8 @@ function Intro({ onStart }: { onStart: () => void }) {
         Descubra qual é o melhor caminho para você começar a lucrar com perfumes árabes
       </h1>
       <p className="mx-auto mt-4 max-w-[420px] text-[0.98rem] leading-relaxed text-muted-foreground">
-        Responda algumas perguntas rápidas e descubra como você pode começar mesmo sem
-        experiência e sem precisar investir milhares de reais em estoque.
+        Responda algumas perguntas rápidas e descubra como você pode começar mesmo sem experiência e
+        sem precisar investir milhares de reais em estoque.
       </p>
 
       <div className="mt-8 overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-card)]">
@@ -245,13 +238,7 @@ function QuestionView({
 
 /* ---------------------------------------------------------------- Break */
 
-function BreakScreen({
-  onContinue,
-  onBack,
-}: {
-  onContinue: () => void;
-  onBack: () => void;
-}) {
+function BreakScreen({ onContinue, onBack }: { onContinue: () => void; onBack: () => void }) {
   return (
     <section className="text-center">
       <span className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-[0.76rem] font-bold tracking-wide text-accent-foreground uppercase">
@@ -261,9 +248,9 @@ function BreakScreen({
         Ótimo! Pelas suas respostas, perfumes árabes podem fazer sentido para o seu perfil.
       </h2>
       <p className="mt-4 text-[0.96rem] leading-relaxed text-muted-foreground">
-        Um dos maiores erros de quem começa nesse mercado é comprar os primeiros produtos sem
-        saber quais fornecedores são confiáveis, quais perfumes possuem procura e quanto
-        realmente precisa investir.
+        Um dos maiores erros de quem começa nesse mercado é comprar os primeiros produtos sem saber
+        quais fornecedores são confiáveis, quais perfumes possuem procura e quanto realmente precisa
+        investir.
       </p>
 
       <div className="mt-7 overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-card)]">
@@ -488,9 +475,7 @@ function Result({ answers }: { answers: Answers }) {
           ↓
         </div>
         <div className="rounded-3xl border border-gold/40 bg-ink p-6 shadow-[var(--shadow-lift)]">
-          <p className="text-[0.78rem] font-bold tracking-[0.2em] text-gold uppercase">
-            Com o Kit
-          </p>
+          <p className="text-[0.78rem] font-bold tracking-[0.2em] text-gold uppercase">Com o Kit</p>
           <ul className="mt-4 flex flex-col gap-2.5 text-[0.94rem] text-primary-foreground">
             {[
               "Fornecedores organizados",

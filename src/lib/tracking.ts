@@ -9,11 +9,7 @@ type FbqFn = (...args: unknown[]) => void;
 const STANDARD_EVENTS = new Set(["InitiateCheckout", "Lead", "Purchase", "ViewContent"]);
 
 export type QuizEvent =
-  | "QuizStarted"
-  | "QuizQuestionAnswered"
-  | "QuizCompleted"
-  | "ViewOffer"
-  | "InitiateCheckout";
+  "QuizStarted" | "QuizQuestionAnswered" | "QuizCompleted" | "ViewOffer" | "InitiateCheckout";
 
 export function track(event: QuizEvent, data?: Record<string, unknown>) {
   const fbq = (globalThis as { fbq?: FbqFn }).fbq;

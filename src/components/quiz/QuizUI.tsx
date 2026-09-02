@@ -1,9 +1,7 @@
 import { type ReactNode } from "react";
 
 export function Shell({ children }: { children: ReactNode }) {
-  return (
-    <div className="mx-auto w-full max-w-[520px] px-5 pb-16 sm:px-6">{children}</div>
-  );
+  return <div className="mx-auto w-full max-w-[520px] px-5 pb-16 sm:px-6">{children}</div>;
 }
 
 export function TopBar({ step, total }: { step: number | undefined; total: number }) {
