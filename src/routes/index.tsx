@@ -73,8 +73,18 @@ function QuizPage() {
       if (saved.answers) setAnswers(saved.answers);
       if (typeof saved.pos === "number" && saved.pos > 0 && saved.pos < SCREENS.length) {
         const target = SCREENS[saved.pos]!;
-        // nunca restaurar direto na tela de análise
-        setPos(target.kind === "analyzing" ? saved.pos + 1 : saved.pos);
+
+        // Se o quiz já terminou, uma nova visita começa pela introdução.
+        if (target.kind === "analyzing" || target.kind === "result") {
+          localStorage.removeItem(STORAGE_KEY);
+          setAnswers({});
+          setPos(0);
+          started.current = false;
+          return;
+        }
+
+        // Durante o quiz, preserva o progresso do usuário.
+        setPos(saved.pos);
         started.current = true;
       }
     } catch {
