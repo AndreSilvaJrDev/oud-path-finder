@@ -14,7 +14,12 @@ import {
   personalizedInsight,
   type Answers,
 } from "@/lib/quiz-data";
-import { track } from "@/lib/tracking";
+import {
+  captureAttribution,
+  track,
+  trackOnce,
+  withAttribution,
+} from "@/lib/tracking";
 
 const TITLE = "Quiz: comece a vender perfumes árabes | Kit Fornecedores";
 const DESCRIPTION =
@@ -64,6 +69,11 @@ function QuizPage() {
   const [pending, setPending] = useState<string | null>(null);
   const started = useRef(false);
 
+  // Captura UTMs / parâmetros de atribuição assim que a pessoa entra.
+  useEffect(() => {
+    captureAttribution();
+  }, []);
+
   // Recupera progresso salvo
   useEffect(() => {
     try {
@@ -107,7 +117,12 @@ function QuizPage() {
   }, [pos]);
 
   useEffect(() => {
-    if (screen.kind === "result") track("ViewOffer");
+    if (screen.kind === "result") {
+      trackOnce("ViewOffer", {
+        product: "kit-fornecedores-perfumes-arabes",
+        price: 37,
+      });
+    }
   }, [screen.kind]);
 
   const go = useCallback((delta: number) => {
@@ -121,9 +136,44 @@ function QuizPage() {
     const q = QUESTIONS[qIndex]!;
     setPending(value);
     setAnswers((prev) => ({ ...prev, [q.id]: value }));
-    track("QuizQuestionAnswered", { question: q.id, answer: value, step: qIndex + 1 });
+    track("QuizQuestionAnswered", {
+      question: q.id,
+      answer: value,
+      step: qIndex + 1,
+    });
+
+    const answered = qIndex + 1;
+    const total = QUESTIONS.length;
+    const progress = answered / total;
+
+    if (progress >= 0.25) {
+      trackOnce("Quiz25", {
+        answered,
+        total,
+      });
+    }
+
+    if (progress >= 0.5) {
+      trackOnce("Quiz50", {
+        answered,
+        total,
+      });
+    }
+
+    if (progress >= 0.75) {
+      trackOnce("Quiz75", {
+        answered,
+        total,
+      });
+    }
+
     window.setTimeout(() => {
-      if (qIndex === QUESTIONS.length - 1) track("QuizCompleted");
+      if (qIndex === QUESTIONS.length - 1) {
+        trackOnce("QuizCompleted", {
+          totalQuestions: QUESTIONS.length,
+        });
+      }
+
       go(1);
     }, 280);
   };
@@ -138,7 +188,9 @@ function QuizPage() {
               onStart={() => {
                 if (!started.current) {
                   started.current = true;
-                  track("QuizStarted");
+                  trackOnce("QuizStarted", {
+                    totalQuestions: QUESTIONS.length,
+                  });
                 }
                 go(1);
               }}
@@ -377,11 +429,20 @@ function Result({ answers }: { answers: Answers }) {
   const insight = useMemo(() => personalizedInsight(answers), [answers]);
   const channel = useMemo(() => channelLine(answers), [answers]);
 
+  const checkoutUrl = useMemo(
+    () => withAttribution(CHECKOUT_URL),
+    [],
+  );
+
   const goCheckout = () => {
-    track("InitiateCheckout", {
+    const eventData = {
       product: "kit-fornecedores-perfumes-arabes",
-      price: 37,
-    });
+      value: 37,
+      currency: "BRL",
+    };
+
+    track("CheckoutClick", eventData);
+    track("InitiateCheckout", eventData);
   };
 
   return (
@@ -598,7 +659,7 @@ function Result({ answers }: { answers: Answers }) {
           <div className="mt-6">
             <PrimaryButton
               as="a"
-              href={CHECKOUT_URL}
+              href={checkoutUrl}
               onClick={goCheckout}
             >
               Quero acessar o Kit Árabe →
