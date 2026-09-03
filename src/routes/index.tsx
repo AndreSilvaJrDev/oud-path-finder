@@ -553,42 +553,67 @@ function Result({ answers }: { answers: Answers }) {
       >
         <div className="bg-ink px-6 py-5 text-center">
           <p className="text-[0.74rem] font-bold tracking-[0.22em] text-gold uppercase">
-            Acesso completo ao Kit Árabe
+            Oferta de lançamento
           </p>
+
           <h2 className="mt-2 text-[1.35rem] leading-[1.25] text-primary-foreground">
-            Comece com mais clareza e organização
+            Acesso completo ao Kit Árabe
           </h2>
         </div>
 
         <div className="p-6 text-center">
-          <p className="text-[0.82rem] font-semibold tracking-wide text-muted-foreground uppercase">
-            Pagamento único
+          <p className="text-[0.86rem] text-muted-foreground">
+            Valor total dos materiais
+          </p>
+
+          <div className="mt-1 flex items-center justify-center gap-1 text-muted-foreground">
+            <span className="text-[0.95rem] font-semibold">R$</span>
+            <span className="text-[1.5rem] font-bold line-through opacity-60">
+              97
+            </span>
+          </div>
+
+          <p className="mt-4 text-[0.82rem] font-bold tracking-wide text-ink uppercase">
+            Hoje por apenas
           </p>
 
           <div className="mt-2 flex items-end justify-center gap-1 text-ink">
-            <span className="mb-1 text-[1rem] font-semibold">R$</span>
-            <span className="text-[3.35rem] leading-none font-black tracking-[-0.05em]">37</span>
+            <span className="mb-1 text-[1.05rem] font-semibold">
+              R$
+            </span>
+
+            <span className="text-[3.7rem] leading-none font-black tracking-[-0.05em]">
+              37
+            </span>
           </div>
 
-          <p className="mt-2 text-[0.84rem] text-muted-foreground">
-            Acesso digital aos materiais após a confirmação do pagamento.
+          <p className="mt-3 text-[0.88rem] font-bold text-gold">
+            Você economiza R$60
+          </p>
+
+          <p className="mt-3 text-[0.84rem] leading-relaxed text-muted-foreground">
+            Pagamento único • acesso digital após a confirmação do pagamento
           </p>
 
           <div className="mt-6">
-            <PrimaryButton as="a" href={CHECKOUT_URL} onClick={goCheckout}>
+            <PrimaryButton
+              as="a"
+              href={CHECKOUT_URL}
+              onClick={goCheckout}
+            >
               Quero acessar o Kit Árabe →
             </PrimaryButton>
           </div>
 
           <ul className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[0.78rem] text-muted-foreground">
             <li>🔒 Pagamento seguro</li>
-            <li>⚡ Produto digital</li>
+            <li>⚡ Acesso digital</li>
             <li>📱 Celular ou computador</li>
           </ul>
 
           <p className="mx-auto mt-5 max-w-[400px] text-[0.72rem] leading-relaxed text-muted-foreground">
-            Material educacional e de pesquisa. Resultados dependem da execução, das condições de
-            compra e do mercado; não há garantia de lucro.
+            Material educacional e de pesquisa. Resultados dependem da execução,
+            das condições de compra e do mercado.
           </p>
         </div>
       </div>
@@ -599,7 +624,16 @@ function Result({ answers }: { answers: Answers }) {
             <p className="truncate text-[0.68rem] font-bold tracking-[0.16em] text-gold uppercase">
               Kit Árabe
             </p>
-            <p className="mt-0.5 text-[1.12rem] font-black text-primary-foreground">R$ 37</p>
+
+            <div className="mt-0.5 flex items-center gap-2">
+              <span className="text-[0.75rem] text-primary-foreground/50 line-through">
+                R$97
+              </span>
+
+              <span className="text-[1.15rem] font-black text-primary-foreground">
+                R$37
+              </span>
+            </div>
           </div>
 
           <a
